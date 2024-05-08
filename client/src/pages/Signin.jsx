@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import { useState } from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import { signInStart , signInFailure,signInSuccess } from "../redux/user/userSlice.js";
+import { signInStart , signInFailure,signInSuccess } from "../redux/user/userSlice";
 
 
 export default function SignIn() {
