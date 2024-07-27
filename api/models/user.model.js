@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema(
     },
     avatar:{
       type : String,
-      default : 'https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg'
+      default : 'https://images.freeimages.com/fic/images/icons/61/dragon_soft/512/user.png'
     },
 
   },
