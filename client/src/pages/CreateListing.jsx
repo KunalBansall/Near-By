@@ -28,12 +28,23 @@ export default function CreateListing() {
   });
   const [imageUploaderror, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
-  // console.log(files);
-  console.log(formData);
+
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleImageSubmit = (e) => {
+    const MAX_SIZE_MB = 2;
+
+    // Check if any file exceeds the 2 MB size limit
+    const oversizedFiles = Array.from(files).filter(
+      (file) => file.size > MAX_SIZE_MB * 1024 * 1024
+    );
+
+    if (oversizedFiles.length > 0) {
+      setImageUploadError(`Each image must be less than ${MAX_SIZE_MB} MB.`);
+      return;
+    }
+
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       setUploading(true);
       setImageUploadError(false);
@@ -54,11 +65,11 @@ export default function CreateListing() {
           setUploading(false);
         })
         .catch((err) => {
-          setImageUploadError("Image upload failed (2 mb max per image) ");
-          // setUploading(false);
+          setImageUploadError("Image upload failed (2 MB max per image).");
+          setUploading(false);
         });
     } else {
-      setImageUploadError("You can only upload 6 images per listing");
+      setImageUploadError("You can only upload 6 images per listing.");
       setUploading(false);
     }
   };
@@ -252,7 +263,7 @@ export default function CreateListing() {
                 type="number"
                 id="bedrooms"
                 min="1"
-                max="10"
+                max="15"
                 required
                 className="p-3 border-2 border-gray-300 rounded-lg"
                 onChange={handlechange}
@@ -265,7 +276,7 @@ export default function CreateListing() {
                 type="number"
                 id="bathrooms"
                 min="1"
-                max="10"
+                max="15"
                 required
                 className="p-3 border-2 border-gray-300 rounded-lg"
                 onChange={handlechange}
@@ -278,7 +289,7 @@ export default function CreateListing() {
                 type="number"
                 id="regularPrice"
                 min="50"
-                max="1000000"
+                max="100000000"
                 required
                 className="p-3 border-2 border-gray-300 rounded-lg"
                 onChange={handlechange}
@@ -286,11 +297,9 @@ export default function CreateListing() {
               />
               <div className="flex flex-col items-center">
                 <p>Regular Price</p>
-              {formData.type==='rent' && (
-                
-                <span className="text-xs">(Rs / Month)</span>
-              )}
-                
+                {formData.type === "rent" && (
+                  <span className="text-xs">(Rs / Month)</span>
+                )}
               </div>
             </div>
             {formData.offer && (
@@ -299,7 +308,7 @@ export default function CreateListing() {
                   type="number"
                   id="discountedPrice"
                   min="0"
-                  max="100000"
+                  max="10000000"
                   required
                   className="p-3 border-2 border-gray-300 rounded-lg"
                   onChange={handlechange}
@@ -307,10 +316,9 @@ export default function CreateListing() {
                 />
                 <div className="flex flex-col items-center">
                   <p>Discounted Price</p>
-                  {formData.type==='rent' && (
-                
-                <span className="text-xs">(Rs / Month)</span>
-              )}
+                  {formData.type === "rent" && (
+                    <span className="text-xs">(Rs / Month)</span>
+                  )}
                 </div>
               </div>
             )}
@@ -329,7 +337,6 @@ export default function CreateListing() {
               className="p-3 border border-gray-300 rounded w-full"
               type="file"
               id="images"
-              accept="images/*"
               multiple
             />
             <button

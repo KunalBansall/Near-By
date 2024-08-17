@@ -48,6 +48,17 @@ export default function CreateListing() {
     fetchListing();
   }, []);
   const handleImageSubmit = (e) => {
+    const MAX_SIZE_MB = 2;
+
+    // Check if any file exceeds the 2 MB size limit
+    const oversizedFiles = Array.from(files).filter(
+      (file) => file.size > MAX_SIZE_MB * 1024 * 1024
+    );
+
+    if (oversizedFiles.length > 0) {
+      setImageUploadError(`Each image must be less than ${MAX_SIZE_MB} MB.`);
+      return;
+    }
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       setUploading(true);
       setImageUploadError(false);
@@ -265,7 +276,7 @@ export default function CreateListing() {
                 type="number"
                 id="bedrooms"
                 min="1"
-                max="10"
+                max="20"
                 required
                 className="p-3 border-2 border-gray-300 rounded-lg"
                 onChange={handlechange}
@@ -278,7 +289,7 @@ export default function CreateListing() {
                 type="number"
                 id="bathrooms"
                 min="1"
-                max="10"
+                max="20"
                 required
                 className="p-3 border-2 border-gray-300 rounded-lg"
                 onChange={handlechange}
@@ -291,7 +302,7 @@ export default function CreateListing() {
                 type="number"
                 id="regularPrice"
                 min="50"
-                max="1000000"
+                max="100000000"
                 required
                 className="p-3 border-2 border-gray-300 rounded-lg"
                 onChange={handlechange}
@@ -308,7 +319,7 @@ export default function CreateListing() {
                   type="number"
                   id="discountedPrice"
                   min="0"
-                  max="100000"
+                  max="1000000"
                   required
                   className="p-3 border-2 border-gray-300 rounded-lg"
                   onChange={handlechange}
@@ -335,7 +346,6 @@ export default function CreateListing() {
               className="p-3 border border-gray-300 rounded w-full"
               type="file"
               id="images"
-              accept="images/*"
               multiple
             />
             <button
