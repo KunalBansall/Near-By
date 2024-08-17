@@ -22,9 +22,9 @@ const listingSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    bathrooms:{
-        type:Number,
-        required:true,
+    bathrooms: {
+      type: Number,
+      required: true,
     },
     bedrooms: {
       type: Number,
@@ -38,9 +38,9 @@ const listingSchema = new mongoose.Schema(
       type: Boolean,
       required: true,
     },
-    type:{
-        type:String,
-        required:true,
+    type: {
+      type: String,
+      required: true,
     },
     offer: {
       type: Boolean,
@@ -53,6 +53,10 @@ const listingSchema = new mongoose.Schema(
     userRef: {
       type: String,
       required: true,
+    },
+    views: {
+      type: Number,
+      default: 0, // Initialize with 0 views
     },
   },
   { timestamps: true }
