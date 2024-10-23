@@ -29,7 +29,7 @@ Start the development server:
 
 npm run dev
 Usage
-Frontend: Visit http://localhost:3000 to access the frontend interface.
-Backend: The backend server runs on http://localhost:5000.
+Frontend: Visit https://near-by-wdv4.onrender.com/ to access the frontend interface.
+Backend: The backend server runs on https://near-by-wdv4.onrender.com/.
 Contributing
 Contributions are welcome! Please fork this repository and submit a pull request with your changes.
